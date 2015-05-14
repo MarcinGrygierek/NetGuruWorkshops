@@ -1,0 +1,37 @@
+!!!
+%html{ lang: 'en' }
+  %head
+    %meta{ charset: 'utf-8' }/
+    %meta{ content: 'IE=Edge,chrome=1', 'http-equiv' => 'X-UA-Compatible' }/
+    %meta{ content: 'width=device-width, initial-scale=1.0', name: 'viewport' }/
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+
+
+  %body
+    %nav.navbar.navbar-default
+      .container
+        .navbar-header
+          %span.navbar-brand #{AppConfig.workshops_name}
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            = link_to 'Home', root_path
+          - if user_signed_in?
+            %li
+              = link_to "Profile", current_user
+            %li  
+              = link_to 'Sign out', destroy_user_session_path, method: :delete
+          - else
+            %li
+              = link_to 'Sign in', new_user_session_path
+            %li
+              = link_to 'Sign up', new_user_registration_path
+    %main
+      .container
+        .row
+          .col-lg-12
+            = yield
+  %footer
+    .container
+      NetGuru Gliwice 2015 task

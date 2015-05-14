@@ -1,0 +1,22 @@
+%h2 User panel
+= "#{user.firstname} #{user.lastname}"
+
+%h3 Last 5 reviews:
+%table.table.table-bordered
+  %thead
+    %tr
+      %th
+        Review
+      %th
+        Date
+      %th
+        Product ID
+  %tbody
+    - reviews.each do |review|
+      - break if @review_counter == 5
+      - if current_user.id == review.user_id
+      - @review_counter += 1
+        %tr
+          %td= review.content
+          %td= review.created_at.strftime("%d-%m-%y")
+          %td= review.product_id

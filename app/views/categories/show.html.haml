@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%h2 Category view
+
+%p
+  %b Name:
+  = category.name
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th
+        ID
+      %th
+        Title
+  %tbody
+    - category.products.each do |product|
+      %tr
+        %td
+          = product.id
+        %td
+          = product.title
+%hr
+- if current_user.admin?
+  = link_to 'Edit', edit_category_path(category)
+  \|
+= link_to 'Back', categories_path, class: 'btn btn-primary'

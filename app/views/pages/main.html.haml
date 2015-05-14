@@ -1,0 +1,14 @@
+%div.jumbotron
+	%h2 NetGuru Workshops Gliwice 2015
+	- if user_signed_in?
+		- if current_user.admin?
+			%p Welcome admin. Would you like to do something?
+			= link_to 'Create category', new_category_path, :class=>("btn btn-primary btn-lg")
+		- else
+			%p Welcome user. Would you like to do something?
+		= link_to 'View categories and add product', categories_path, :class=>("btn btn-primary btn-lg")	
+		= link_to 'View your profile', user_path(current_user), :class=>("btn btn-primary btn-lg")	
+	- else
+		%p Welcome. Would you like to sign in or sign up?
+		= link_to 'Sign up', new_user_registration_path, :class=>("btn btn-primary btn-lg")
+		= link_to 'Sign in', new_user_session_path, :class=>("btn btn-primary btn-lg")

@@ -1,0 +1,30 @@
+%p#notice= notice
+%p#error= flash[:error]
+
+%h3 Product info:
+%p
+  %b Title:
+  = product.title
+%p
+  %b Description:
+  = product.description
+%p
+  %b Price:
+  = product.price
+
+%p
+  %b Category
+  = product.category.name
+
+%h3 Add review:
+= render 'reviews/form'
+
+
+%h3 Read reviews about "#{product.title}":
+= render reviews
+
+%hr
+- if current_user == product.user or current_user.admin?
+  = link_to 'Edit', edit_category_product_path(category.id, product.id), class: 'btn btn-primary'
+  \|
+= link_to 'Back', category_products_path, class: 'btn btn-primary'
